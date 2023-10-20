@@ -1,5 +1,5 @@
 import React from 'react'
-import WeatherBox from './weatherBox';
+import WeatherBox from './weatherBox.jsx';
 
 const App = () => {
    
