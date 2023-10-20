@@ -47,10 +47,12 @@ const WeatherBox = () => {
           sunset: data.sys.sunset,
           timezone: data.timezone,
           Tempcond: data.weather[0].description,
-          Tempcond2: data.weather[0].main
+          Tempcond2: data.weather[0].main,
+          
 
         }
         setWeatherinfo(weather);
+        console.log(data.weather[0].main);
       }
       )
       .catch(err => { console.log(err) })
@@ -61,7 +63,7 @@ const WeatherBox = () => {
       getweather();
     }
   };
-
+   
 
 
 
@@ -72,11 +74,16 @@ const WeatherBox = () => {
 
         <div className='app'
 
-          style={weatherinfo.Tempcond2 === 'clear' ? { backgroundImage: `url(${clear})` } :
-            weatherinfo.Tempcond2 === 'haze' ? { backgroundImage: `url(${mist})` } :
-              weatherinfo.Tempcond2 === 'rainy' ? { backgroundImage: `url(${Rainy})` } :
-                { backgroundImage: `url(${Rainy})` }
-          }>
+          style={{ backgroundImage:weatherinfo.Tempcond==="clear"?`url(${clear})`:
+                   weatherinfo.Tempcond==="rainy"?`url(${Rainy})`:
+                   weatherinfo.Tempcond==="haze"?`url(${mist})`:
+                   weatherinfo.Tempcond==="mist"?`url(${mist})`:
+                   weatherinfo.Tempcond==="snow"?`url(${snowy})`:
+                   `url(${Rainy})`,
+                   backgroundRepeat:'no-repeat',
+                   backgroundSize:"cover",
+            
+         }}>
           <div>
             <nav className="top">
               <div className="logo">

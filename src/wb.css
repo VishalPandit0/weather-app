@@ -8,6 +8,8 @@
 body {
   font-family: "Josefin Sans", sans-serif;
   color: aliceblue;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 nav {
@@ -228,6 +230,7 @@ nav {
 }
 
 @media only screen and (max-width:600px) {
+
   nav {
     padding: 3% 1%;
   }
