@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import '../src/wb.css'
+
 import sun_logo from '../src/assets/sun.png'
 import clear from '../src/assets/clear.jpg'
 import mist from '../src/assets/mist.jpg'
 import Rainy from '../src/assets/Rainy.jpg'
 import snowy from '../src/assets/snowy.jpg'
+import cloudy from '../src/assets/cloudy.jpg'
 import thermometer from '../src/assets/thermometer.png'
 import humidity from '../src/assets/humidity.png'
 import visibility from '../src/assets/visibility.png'
@@ -13,6 +15,14 @@ import sunrise from '../src/assets/sunrise.png'
 import sunset from '../src/assets/sunset.png'
 import moonrise from '../src/assets/moon.png'
 import moonset from '../src/assets/moonset.png'
+import clearlogo from '../src/assets/clearlogo.png'
+import hazelogo from '../src/assets/hazelogo.png'
+import cloudlogo from '../src/assets/cloudlogo.png'
+import rainlogo from '../src/assets/rainlogo.png'
+import snowlogo from '../src/assets/snowlogo.png'
+
+
+
 
 
 const WeatherBox = () => {
@@ -29,6 +39,7 @@ const WeatherBox = () => {
   function getweather() {
     const apikey = '5f4c1fce47a38a428816c2e08ec7c9b1';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`
+
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
@@ -48,11 +59,11 @@ const WeatherBox = () => {
           timezone: data.timezone,
           Tempcond: data.weather[0].description,
           Tempcond2: data.weather[0].main,
-          
+
+
 
         }
         setWeatherinfo(weather);
-        console.log(data.weather[0].main);
       }
       )
       .catch(err => { console.log(err) })
@@ -63,7 +74,7 @@ const WeatherBox = () => {
       getweather();
     }
   };
-   
+
 
 
 
@@ -74,16 +85,19 @@ const WeatherBox = () => {
 
         <div className='app'
 
-          style={{ backgroundImage:weatherinfo.Tempcond==="clear"?`url(${clear})`:
-                   weatherinfo.Tempcond==="rainy"?`url(${Rainy})`:
-                   weatherinfo.Tempcond==="haze"?`url(${mist})`:
-                   weatherinfo.Tempcond==="mist"?`url(${mist})`:
-                   weatherinfo.Tempcond==="snow"?`url(${snowy})`:
-                   `url(${Rainy})`,
-                   backgroundRepeat:'no-repeat',
-                   backgroundSize:"cover",
-            
-         }}>
+          style={{
+            backgroundImage: weatherinfo.Tempcond2 === "Clear" ? `url(${clear})` :
+              weatherinfo.Tempcond2 === "Rainy" ? `url(${Rainy})` :
+              weatherinfo.Tempcond2 === "Haze" ? `url(${mist})` :
+              weatherinfo.Tempcond2 === "Mist" ? `url(${mist})` :
+              weatherinfo.Tempcond2 === "Smoke" ? `url(${mist})` :
+              weatherinfo.Tempcond2 === "Snow" ? `url(${snowy})` :
+              weatherinfo.Tempcond2 === "Clouds" ? `url(${cloudy})` :
+                        `url(${Rainy})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: "cover",
+
+          }}>
           <div>
             <nav className="top">
               <div className="logo">
@@ -103,7 +117,14 @@ const WeatherBox = () => {
                 </div>
 
                 <div className="temprature">
-                  <div className="tempimg"><img src={sun_logo} alt="weatherLike" /></div>
+                  <div className="tempimg"><img src={weatherinfo.Tempcond2 === "Clear" ? `${clearlogo}` :
+                    weatherinfo.Tempcond2 === "Rainy" ? `${rainlogo}` :
+                    weatherinfo.Tempcond2 === "Haze" ? `${hazelogo}` :
+                    weatherinfo.Tempcond2 === "Mist" ? `${hazelogo}` :
+                    weatherinfo.Tempcond2 === "Smoke" ? `${hazelogo}` :
+                    weatherinfo.Tempcond2 === "Snow" ? `${snowlogo}` :
+                    weatherinfo.Tempcond2 === "Clouds" ? `${cloudlogo}` :
+                   `${clearlogo}`} alt="weatherLike" /></div>
                   <h1>{weatherinfo.temprature.toFixed()}</h1>
                   <h1>&deg;</h1>
                   <div className="cOrF">
@@ -175,12 +196,12 @@ const WeatherBox = () => {
                 <h4>MOONRISE</h4>
                 <div className="moonrise">
                   <img src={moonrise} alt="" className="icon" />{" "}
-                  7:00 PM
+                  11:05 pm
                 </div>
                 <h4>MOONSET</h4>
                 <div className='moonset'>
                   <img src={moonset} alt="" className="icon" />{" "}
-                  4:00 AM
+                  4:00 am
                 </div>
               </div>
             </div>
